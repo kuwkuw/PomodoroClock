@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pomodoro Clock</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
+	<link rel="stylesheet" href="./css/main.css">
+	
+</head>
+<body>
+	<div class="container">
+		<div class="timer-wrapper">
+			<div class="title"><h1>Pomodoro Clock</h1></div>		
+			<div class="timer-controls">
+				<div class="controls">
+					<span>BREAK LENGTH</span>
+					<div class="break-controls">
+						<i class="fa fa-minus-square decriment"></i>
+						<span class="count"></span>
+						<i class="fa fa-plus-square incriment"></i>
+					</div>
+				</div>
+				<div class="controls">
+					<span>SESSION LENGTH</span>
+					<div class="session-controls">
+						<i class="fa fa-minus-square decriment"></i>
+						<span class="count"></span>
+						<i class="fa fa-plus-square incriment"></i>
+					</div>
+				</div>
+				<input class='reset btn btn-primary' type="button" value="Reset timer">
+			</div>
+			<div class="timer-conteiner">
+				<div class="timer">
+					<div class="ring">
+						<div class="time-bg"></div>
+						<div class="timer-indicator">
+							<div class="text">Session</div>
+							<div class="time"></div>
+							<div class="indicator"></div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>
