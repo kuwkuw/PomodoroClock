@@ -1,37 +1,45 @@
+'use strict';
+
 	function PomodoroClickWidget(){
-		this.set();	
-	}
-
-	PomodoroClickWidget.prototype.set = function(){
+		this.set();
 		this.isStop = true;
-		this.breakLength = 5
-		this.sessioLength = 25
-		this.time = new Date(1000*60*this.sessioLength);
-		this.startTime = new Date(1000*60*this.sessioLength);
 
-
-		this.timeViewer =  document.querySelector('.time');
-
-		this.bg =  document.querySelector('.time-bg');
-
-		this.intervatID;
+		var THIS = this;
 
 		document.querySelector('.timer')
 			.addEventListener('click', this._startStopHendler.bind(this), false);
 		
 		document.querySelector('.break-controls')
-			.addEventListener('click',function(event){this._chengBreakLength(event)}.bind(this), false);
+			.addEventListener('click',function(event){THIS._chengBreakLength(event)}, false);
 		
 		document.querySelector('.session-controls')
-			.addEventListener('click',function(event){this._chengSessioLength(event)}.bind(this), false);
+			.addEventListener('click',function(event){THIS._chengSessioLength(event)}, false);
 
 		document.querySelector('.reset')
-			.addEventListener('click',function(){this.set()}.bind(this), false);
+			.addEventListener('click',function(){
+				THIS.set(); 
+			}, false);
 
-		document.querySelector('.break-controls>.count').innerText = this.breakLength;
-		document.querySelector('.session-controls>.count').innerText = this.sessioLength;
+		
+	}
 
+	PomodoroClickWidget.prototype.set = function(){
+		
+		this.breakLength = 5
+		this.sessioLength = 25
+		this.time = new Date(1000 * 60 * this.sessioLength);
+		this.startTime = new Date(1000 * 60 * this.sessioLength);
+
+		this.timeViewer =  document.querySelector('.time');
 		this.timeViewer.innerText=this.sessioLength;
+		
+		this.bg =  document.querySelector('.time-bg');
+		this.bg.style.height = '0';
+
+		this.intervalID;		
+		
+		document.querySelector('.break-controls>.count').innerText = this.breakLength;
+		document.querySelector('.session-controls>.count').innerText = this.sessioLength;		
 	}
 
 	PomodoroClickWidget.prototype._chengBreakLength = function(event){
@@ -94,22 +102,22 @@
 		this.startTime = new Date(1000*60*this.sessioLength);
 		this.time=new Date(this.time-1000);		
 		this.timeViewer.innerText = this.time.getMinutes()+':'+this.time.getSeconds();
-		this.intervatID = setInterval(function(){
+		this.intervalID = setInterval(function(){
 			_this.time=new Date(_this.time-1000);
 			_this.bg.style.height = (1-(_this.time/_this.startTime))*100+'%';
-			console.log("t :"+_this.time/_this.startTime);
-			console.log(_this.time-1);
-			console.log(_this.startTime-1);
+			// console.log("t :"+_this.time/_this.startTime);
+			// console.log(_this.time-1);
+			// console.log(_this.startTime-1);
 			_this.timeViewer.innerText = _this.time.getMinutes()+':'+_this.time.getSeconds();
 			if(_this.time.getMinutes()==0 && _this.time.getSeconds()==0){				
-				clearInterval(_this.intervatID);
+				clearInterval(_this.intervalID);
 				collback.call(_this);				
 			} 
 		}, 1000);
 	}
 
 	PomodoroClickWidget.prototype.stop = function(){
-		clearInterval(this.intervatID);
+		clearInterval(this.intervalID);
 	}
 
 	var tmp =  new PomodoroClickWidget();
