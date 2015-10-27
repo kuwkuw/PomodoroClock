@@ -1,9 +1,9 @@
-'use strict';
+(function(){
+	'use strict';
 
 	function PomodoroClickWidget(){
 		this.set();
 		this.isStop = true;
-
 		var THIS = this;
 
 		document.querySelector('.timer')
@@ -123,4 +123,6 @@
 		clearInterval(this.intervalID);
 	}
 
-	var tmp =  new PomodoroClickWidget();
+	window.PomodoroClickWidget =  PomodoroClickWidget;
+})()
+
