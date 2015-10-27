@@ -70,11 +70,14 @@
 
 
 	PomodoroClickWidget.prototype._startStopHendler = function(){
+		var startStopClickText = document.querySelector('.click-text');
 		if(this.isStop){
+			startStopClickText.innerText ='Click to stop';
 			this.isStop = false;
 			console.log('started');
 			this.start(this.startBreak);
 		}else{
+			startStopClickText.innerText ='Click to start';
 			this.isStop = true;
 			console.log('stoped');
 			this.stop();
